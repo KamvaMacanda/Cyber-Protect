@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-namespace Cyber_Protect 
+namespace Cyber_Protect
     
 {
     public class Program
