@@ -19,8 +19,6 @@ namespace Cyber_Protect
             //----------------------------------------------------------------------------------------------------------------------------------------//
             builder.Services.AddDbContext<Data.AppDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-
             //----------------------------------------------------------------------------------------------------------------------------------------//
 
 
