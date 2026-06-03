@@ -1,7 +1,11 @@
+
 using Microsoft.EntityFrameworkCore;
-namespace Cyber_Protect
+
     
-{
+
+namespace Cyber_Protect 
+{ 
+
     public class Program
     {
         public static void Main(string[] args)
@@ -11,12 +15,14 @@ namespace Cyber_Protect
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+
             //----------------------------------------------------------------------------------------------------------------------------------------//
             builder.Services.AddDbContext<Data.AppDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 
             //----------------------------------------------------------------------------------------------------------------------------------------//
+
 
 
 
