@@ -13,7 +13,7 @@ namespace Cyber_Protect.Models
         [Required , EmailAddress]
          public string ? Email { get; set; } 
     
-         
+         public ICollection <Incident> Incidents { get; set; }
     
 
     }

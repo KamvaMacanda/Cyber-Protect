@@ -18,14 +18,29 @@ namespace Cyber_Protect.Models
         [StringLength(10)]
         public  string Status { get; set; }
 
-        [Required, Timestamp]
+        [DataType(DataType.Date)]
         public DateTime DateReported { get; set; } 
          
         public string Assign { get; set; } = string.Empty;
 
+        [Required, StringLength(100)]
+        public string Title { get; set; } = string.Empty;
 
-        public   ICollection <Employee> Employees { get; set; } 
-        public ICollection <Threat> Threats { get; set; }
+        [Required, StringLength(100)]
+        public string AddNotes { get; set; } = string.Empty;
+
+
+        //Navigateion Properties using FKs 
+
+        [Display(Name = "Analyst")]
+        public int EmployeeID { get; set; }
+        public Employee? Employee { get; set; }
+
+        [Display (Name ="Threat Assemnet ")]
+        public int ThreatID { get; set; }
+        public Threat? Threat { get; set; }
+
+
 
     }  
 }

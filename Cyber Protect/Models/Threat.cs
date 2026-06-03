@@ -13,6 +13,6 @@ namespace Cyber_Protect.Models
         [Required , StringLength(20)]
         public string Severity { get; set; }
 
-
+        public ICollection<Incident> Incidents { get; set; }
     }
 }

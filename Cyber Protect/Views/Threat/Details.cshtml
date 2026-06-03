@@ -1,0 +1,38 @@
+@model Cyber_Protect.Models.Threat
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Threat</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.level)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.level)
+        </dd>
+    </dl>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Severity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Severity)
+        </dd>
+    </dl>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Incidents)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Incidents)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.ThreatID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
