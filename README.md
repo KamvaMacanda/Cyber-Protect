@@ -18,5 +18,8 @@ Centralized system for cybersecurity incidents in organizations and companys
 -	 Logs all actions
 -	 Tracks progress until resolve
 
+## Read  me future implementations 
+[Cybersecurity Incident Management System.docx](https://github.com/user-attachments/files/29371092/Cybersecurity.Incident.Management.System.docx)
+
 
   
