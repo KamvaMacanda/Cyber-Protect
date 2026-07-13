@@ -33,16 +33,29 @@
                         <i class="fa-solid fa-triangle-exclamation"></i> Incidents
                     </a>
                 </li>
+
                 <li>
                     <a class="cp-nav-link" asp-controller="Threat" asp-action="Index">
                         <i class="fa-solid fa-biohazard"></i> Threats
                     </a>
-                </li>
+                </li> 
+
                 <li>
                     <a class="cp-nav-link" asp-controller="Employee" asp-action="Index">
                         <i class="fa-solid fa-users-gear"></i> Analysts
                     </a>
-                </li>
+                </li>  
+
+              
+                    <li>
+                        <a class="cp-nav-link" asp-area="Identity" asp-page="/Account/Login">
+                            <i class="fa-solid fa-right-to-bracket"></i> Login
+                        </a>
+                    </li>
+
+
+
+
             </ul>
         </nav>
     </header>
@@ -75,6 +88,8 @@
         });
     </script>
 
-    @await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync("Scripts", required: false) 
+
+
 </body>
 </html>
