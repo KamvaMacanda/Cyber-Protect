@@ -1,27 +1,157 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model Cyber_Protect.Models.Dashboard
+
+@{
+    ViewData["Title"] = "Dashboard";
 }
 
-<div data-aos="fade-up">
-    <h1 class="display-4 fw-bold mb-3">
-        <i class="fa-solid fa-calendar-star me-2" style="color: var(--accent);"></i>
-        Cyber Protect 
-    </h1>
-    <p class="lead mb-4" style="color: var(--muted);">
-        We are a centralized cybersecurity management platform to help you manage incidents , threats 
-    </p>
+<!-- ADDED: scoped styling for stat cards + chart cards -->
+<style>
+    .cp-stat-card {
+        background: #161b22;
+        border: 1px solid #30363d;
+        border-radius: 10px;
+        padding: 1.25rem 1.5rem;
+        transition: border-color 0.2s ease, transform 0.2s ease;
+    }
 
-    <div class="d-flex gap-2 flex-wrap">
-        <a asp-controller="Incidents" asp-action="Index" class="btn btn-success btn-lg">
-            <i class="fa-solid fa-tent me-2"></i>View incidents
-        </a>
-        <a asp-controller="Threats" asp-action="Index" class="btn btn-outline-light btn-lg">
-            <i class="fa-solid fa-calendar-days me-2"></i>Views Threats  
+        .cp-stat-card:hover {
+            border-color: #00c896;
+            transform: translateY(-2px);
+        }
 
+        .cp-stat-card p {
+            margin: 0 0 0.35rem;
+            font-size: 0.85rem;
+            color: #8b949e;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
 
+        .cp-stat-card h2 {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #e6edf3;
+        }
 
+    .cp-accent {
+        color: #00c896;
+    }
 
-        </a>
+    .card {
+        background: #161b22;
+        border: 1px solid #30363d;
+        border-radius: 10px;
+    }
+
+    .card-header {
+        background: #1c232b;
+        border-bottom: 1px solid #30363d;
+        color: #e6edf3;
+        font-weight: 600;
+        padding: 0.85rem 1.1rem;
+    }
+
+    .card-body {
+        padding: 1.25rem;
+    }
+</style>
+
+<!-- Summary cards -->
+<div class="row g-3 mb-4">
+    <div class="col-md-4">
+        <div class="cp-stat-card">
+            <p>Open Incidents</p>
+            <h2 class="cp-accent">@Model.OpenIncidents</h2>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="cp-stat-card">
+            <p>Closed This Month</p>
+            <h2>@Model.ClosedThisMonth</h2>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="cp-stat-card">
+            <p>Critical Threats</p>
+            <h2 style="color: @(Model.CriticalThreats > 0 ? "#f85149" : "#8b949e")">
+                @Model.CriticalThreats
+            </h2>
+        </div>
     </div>
 </div>
+
+<!-- Charts -->
+<div class="row g-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header"><i class="fa-solid fa-chart-bar me-1"></i> Incidents per Analyst</div>
+            <div class="card-body">
+                <canvas id="analystChart" height="260"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header"><i class="fa-solid fa-chart-pie me-1"></i> Threats by Severity</div>
+            <div class="card-body">
+                <canvas id="severityChart" height="260"></canvas>
+            </div>
+        </div>
+    </div>
 </div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        Chart.defaults.color       = '#8b949e';
+        Chart.defaults.borderColor = '#30363d';
+
+        const analystData = @Html.Raw(Json.Serialize(Model.IncidentsByAnalyst));
+
+        new Chart(document.getElementById('analystChart'), {
+        type: 'bar',
+        data: {
+        labels:   analystData.map(x => x.analyst),
+        datasets: [{
+        label: 'Incidents',
+        data: analystData.map(x => x.count),
+        backgroundColor: 'rgba(0,200,150,0.2)',
+        borderColor: '#00c896',
+        borderWidth: 1,
+        borderRadius: 4
+        }]
+        },
+        options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }
+        }
+        });
+
+        const threatData = @Html.Raw(Json.Serialize(Model.ThreatsBySeverity));
+
+        const groups  = threatData.reduce((acc, t) => {
+        acc[t.severity] = (acc[t.severity] || 0) + 1;
+        return acc;
+        }, {});
+
+        const order   = ['Critical','High','Medium','Low'];
+        const colours = { Critical:'#f85149', High:'#d29922', Medium:'#388bfd', Low:'#3fb950' };
+        const labels  = order.filter(s => groups[s]);
+
+        new Chart(document.getElementById('severityChart'), {
+        type: 'doughnut',
+        data: {
+        labels: labels,
+        datasets: [{
+        data:            labels.map(s => groups[s]),
+        backgroundColor: labels.map(s => colours[s] + '33'),
+        borderColor:     labels.map(s => colours[s]),
+        borderWidth: 1.5
+        }]
+        },
+        options: { responsive: true, cutout: '70%' }
+        });
+    </script>
+}

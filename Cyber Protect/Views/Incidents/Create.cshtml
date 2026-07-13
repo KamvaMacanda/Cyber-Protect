@@ -4,9 +4,9 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
 
-<h4>Incident</h4>
+
+<h4> Document a Incident report </h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -21,18 +21,65 @@
                 <label asp-for="Description" class="control-label"></label>
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
+            </div> 
+
             <div class="form-group">
                 <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" class="form-control" />
+                <select asp-for="Status" class="form-control">
+                    <option value="">-- Select Status --</option>
+                    <option value="Open">Open</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Resolved">Resolved</option>
+                </select>
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DateReported" class="control-label"></label>
                 <input asp-for="DateReported" class="form-control" />
                 <span asp-validation-for="DateReported" class="text-danger"></span>
-            </div>
+            </div>  
+
+            <!-- add Threat dropdown -->
             <div class="form-group">
+                <label asp-for="ThreatID" class="control-label"></label>
+                <select asp-for="ThreatID" asp-items="ViewBag.ThreatID" class="form-control"></select>
+                <span asp-validation-for="ThreatID" class="text-danger"></span>
+            </div>
+
+            <!-- add Employee dropdown -->
+            <div class="form-group">
+                <label asp-for="EmployeeID" class="control-label">Analyst</label>
+                <select asp-for="EmployeeID" asp-items="ViewBag.EmployeeID" class="form-control"></select>
+                <span asp-validation-for="EmployeeID" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Affected Systems</label>
+                <div class="d-flex flex-wrap gap-3">
+                    @foreach (var system in ViewBag.CompanySystems as List<string>)
+                    {
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox"
+                                   name="AffectedSystems"
+                                   value="@system"
+                                   id="sys_@system" />
+                            <label class="form-check-label" for="sys_@system">@system</label>
+                        </div>
+                    }
+                </div>
+                <span asp-validation-for="AffectedSystems" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="AddNotes" class="control-label"></label>
+                <input asp-for="AddNotes" class="form-control" />
+                <span asp-validation-for="AddNotes" class="text-danger"></span> 
+                </div>
+
+
+            <div class="form-group"> 
+             
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>

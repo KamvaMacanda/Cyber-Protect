@@ -1,0 +1,8 @@
+Threat Report:
+Threat ID: 2
+Level: Malware
+Threat: malware
+Logged By: 
+Severity: Low
+Incidents: 1
+Threat percentage Score: 10%

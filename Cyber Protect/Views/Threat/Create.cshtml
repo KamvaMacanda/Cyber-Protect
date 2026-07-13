@@ -25,14 +25,32 @@
                 <span asp-validation-for="Severity" class="text-danger"></span>
             </div>
 
+
             <div class="form-group">
-                <label asp-for="Incidents" class="control-label"></label>
-                <input asp-for="Incidents" class="form-control" />
-                <span asp-validation-for="Incidents" class="text-danger"></span>
+                <label asp-for="DateLogged" class="control-label"></label>
+                <input asp-for="DateLogged" class="form-control" />
+                <span asp-validation-for="DateLogged" class="text-danger"></span>
             </div>
+
+      
+
+          
+
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label asp-for="Report" class="control-label"></label>
+                <input asp-for="Report" class="form-control" />
+                <span asp-validation-for="Report" class="text-danger"></span>
             </div>
+
+           
+            <button type="submit" class="btn btn-primary">Log Threat</button>
+
+             
+            
+
+           
+            <a asp-action="Index" class="btn btn-secondary">Back</a>
+
         </form>
     </div>
 </div>

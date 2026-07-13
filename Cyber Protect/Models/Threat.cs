@@ -7,12 +7,24 @@ namespace Cyber_Protect.Models
         [Key]
         public int ThreatID { get; set; }
 
-        [Required]
-        public int level { get; set; }
+        [Required , StringLength(20)]
+        public string level { get; set; }
 
         [Required , StringLength(20)]
         public string Severity { get; set; }
+           
 
-        public ICollection<Incident> Incidents { get; set; }
+        // wriite a report about threat
+        [Required]
+        public string Report { get; set; } = string.Empty; 
+
+        public int ThreatScore { get; set; }
+
+      
+
+
+        public DateTime DateLogged { get; set; } = DateTime.Now;
+
+        public ICollection<Incident> Incidents { get; set; } = new List<Incident>();
     }
 }

@@ -1,47 +1,73 @@
 @model IEnumerable<Cyber_Protect.Models.Threat>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Threats";
 }
 
-<h1>Index</h1>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h4 class="fw-semibold mb-0">Threat Log</h4>
+    <a asp-action="Create" class="btn-cp-primary">
+        <i class="fa-solid fa-plus"></i> Log Threat
+    </a> 
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.level)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Severity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Incidents)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(model => item.level)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.Severity)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.Incidents)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ThreatID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ThreatID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ThreatID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+</div>
+
+<div class="card">
+    <div class="card-header">
+
+        <i class="fa-solid fa-biohazard me-1"></i> All Threats
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Level</th>
+                    <th>Severity</th>
+                    <th>Score</th>
+                    <th>Logged By</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var threat in Model)
+                {
+                    <tr>
+                        <td class="cp-muted">#@threat.ThreatID</td>
+                        <td>@threat.level</td>
+                        <td>
+                            @{
+                                var badgeClass = threat.Severity switch
+                                {
+                                    "Critical" => "badge-critical",
+                                    "High" => "badge-high",
+                                    "Medium" => "badge-medium",
+                                    _ => "badge-low"
+                                };
+                            }
+                            <span class="badge-severity @badgeClass">@threat.Severity</span>
+                        </td>
+                        <td>@($"{threat.ThreatScore}%")</td>
+
+                     
+
+                        <td>@threat.DateLogged.ToString("yyyy-MM-dd")</td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@threat.ThreatID" class="btn btn-sm btn-secondary me-1">
+                                <i class="fa-solid fa-eye"></i>
+                            </a>
+                            <a asp-action="Edit" asp-route-id="@threat.ThreatID" class="btn btn-sm btn-secondary me-1">
+                                <i class="fa-solid fa-pen"></i>
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@threat.ThreatID" class="btn btn-sm btn-danger">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

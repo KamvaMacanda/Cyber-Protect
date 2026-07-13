@@ -1,14 +1,50 @@
+using Cyber_Protect.Data;
 using Cyber_Protect.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace Cyber_Protect.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly AppDbContext _context;
+
+
+        public HomeController(AppDbContext context)
         {
-            return View();
+            _context = context;
+        }
+
+        //passes the Dashboard model
+        public async Task<IActionResult> Index()
+        {
+            var dashboard = new Dashboard
+            {
+                OpenIncidents = await _context.Incidents
+                    .CountAsync(i => i.Status == "Open"),
+
+                ClosedThisMonth = await _context.Incidents
+                    .CountAsync(i => i.Status == "Closed"
+                               && i.DateReported.Month == DateTime.Now.Month
+                               && i.DateReported.Year == DateTime.Now.Year),
+
+                CriticalThreats = await _context.Threats
+                    .CountAsync(t => t.Severity == "Critical"),
+
+                IncidentsByAnalyst = await _context.Employees
+                    .Select(e => new Employee
+                    {
+                        EmployeeID = e.EmployeeID,
+                        Analyst = e.Analyst,
+                        Count = e.Incidents.Count()
+                    })
+                    .ToListAsync(),
+
+                ThreatsBySeverity = await _context.Threats.ToListAsync()
+            };
+
+            return View(dashboard);
         }
 
         public IActionResult Privacy()

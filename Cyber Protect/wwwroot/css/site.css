@@ -1,31 +1,185 @@
+/* ── Base resets ────────────────────────────────────────────── */
 html {
-  font-size: 14px;
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+    html {
+        font-size: 16px;
+    }
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background: #0d1117;
+    color: #e6edf3;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+/* ── Focus rings — updated to match accent green ────────────── */
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 3px rgba(0, 200, 150, 0.25);
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+/* ── Floating label placeholders ────────────────────────────── */
+.form-floating > .form-control-plaintext::placeholder,
+.form-floating > .form-control::placeholder {
+    color: #8b949e;
+    text-align: end;
 }
+
+.form-floating > .form-control-plaintext:focus::placeholder,
+.form-floating > .form-control:focus::placeholder {
+    text-align: start;
+}
+
+/* ── Hero / page header block ───────────────────────────────── */
+/* CHANGED: border and bg updated to match --surface and --border tokens */
+.cp-hero {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+/* ── Stat cards (dashboard summary row) ─────────────────────── */
+/* CHANGED: bg, border, and text colours updated to dark theme tokens */
+.cp-stat-card {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+    .cp-stat-card h2 {
+        color: #e6edf3;
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 0;
+    }
+
+    .cp-stat-card p {
+        color: #8b949e;
+        margin-bottom: 0;
+        font-size: 13px;
+    }
+
+/* ── Utility colours ────────────────────────────────────────── */
+/* CHANGED: accent updated from blue #3b82f6 to cyber-green #00c896 */
+.cp-accent {
+    color: #00c896;
+}
+
+.cp-muted {
+    color: #8b949e;
+}
+
+/* ── Primary button ─────────────────────────────────────────── */
+/* CHANGED: bg updated from blue to accent green, text to dark for contrast */
+.btn-cp-primary {
+    background: #00c896;
+    border: none;
+    color: #0d1117;
+    font-weight: 600;
+    padding: 0.5rem 1.2rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background 0.15s;
+}
+
+    .btn-cp-primary:hover {
+        background: #00dea8;
+        color: #0d1117;
+    }
+
+/* ── Outline button ─────────────────────────────────────────── */
+/* CHANGED: border and hover colour updated to match accent green */
+.btn-cp-outline {
+    background: transparent;
+    border: 1px solid #30363d;
+    color: #8b949e;
+    padding: 0.5rem 1.2rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: border-color 0.15s, color 0.15s;
+}
+
+    .btn-cp-outline:hover {
+        border-color: #00c896;
+        color: #00c896;
+    }
+
+/* ── Navbar ─────────────────────────────────────────────────── */
+/* CHANGED: border colour updated from #1e2a3a to --border #30363d */
+.cp-navbar {
+    background: #161b22;
+    border-bottom: 1px solid #30363d;
+    padding: 0 1.5rem;
+    height: 56px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+    .cp-navbar .navbar-brand {
+        color: #e6edf3;
+        font-size: 1rem;
+    }
+
+        .cp-navbar .navbar-brand:hover {
+            color: #00c896; /* CHANGED: hover colour to accent green */
+        }
+
+/* ── Nav links ──────────────────────────────────────────────── */
+.cp-nav-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    margin: 0;
+    padding: 0;
+}
+
+/* CHANGED: text, hover bg, and hover colour updated to match layout tokens */
+.cp-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #8b949e;
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13.5px;
+    font-weight: 500;
+    transition: background 0.15s, color 0.15s;
+}
+
+    .cp-nav-link:hover {
+        background: #21262d;
+        color: #e6edf3;
+    }
+
+    /* ADDED: active state — green text + subtle green background tint */
+    .cp-nav-link.active {
+        color: #00c896;
+        background: rgba(0, 200, 150, 0.12);
+    }
+

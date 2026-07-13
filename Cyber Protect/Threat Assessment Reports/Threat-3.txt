@@ -1,0 +1,8 @@
+Threat Report:
+Threat ID: 3
+Level: botnet, botnet
+Threat: botnet
+Logged By: 
+Severity: High
+Incidents: 2
+Threat percentage Score: 55%

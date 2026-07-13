@@ -1,53 +1,59 @@
 ﻿@model IEnumerable<Cyber_Protect.Models.Incident>
 
 @{
-    ViewData["Title"] = "Index";
-}
+    ViewData["Title"] = "Incidents";
+} 
 
-<h1>Index</h1>
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="m-0">Incident Reports</h1>
+    <a asp-action="Create" class="btn btn-primary">Create Incident Report</a>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateReported)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateReported)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IncidentID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IncidentID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IncidentID">Delete</a>
-            </td>
-        </tr>
+<div class="table-responsive shadow-sm rounded">
+    <table class="table table-striped table-hover mb-0">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Title)</th>
+                <th>@Html.DisplayNameFor(model => model.Description)</th>
+                <th>@Html.DisplayNameFor(model => model.Status)</th>
+                <th>@Html.DisplayNameFor(model => model.DateReported)</th>   
+                <th>@Html.DisplayNameFor(model => model.Employee)</th>   
+                
+ 
+                
+               
+              
+                <th>@Html.DisplayNameFor(model => model.AddNotes)</th> 
+
+                 <th>@Html.DisplayNameFor(model => model.AffectedSystems)</th>
+                <th class="text-end">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+@foreach (var item in Model)
+{
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.Description</td>
+                <td>@item.Status</td>
+                <td>@item.DateReported</td> 
+                <td>@item.Employee</td> 
+
+           
+
+                <td>@item.AddNotes</td>
+                <td>@item.AffectedSystems</td>
+                <td class="text-end">
+                    <a asp-action="Edit" asp-route-id="@item.IncidentID" class="btn btn-sm btn-outline-primary">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.IncidentID" class="btn btn-sm btn-outline-secondary">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.IncidentID" class="btn btn-sm btn-outline-danger">Delete</a>
+
+                    <form asp-action="GenerateReport" asp-route-id="@item.ThreatID" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-sm btn-warning">Generate Report</button>
+                    </form>
+                </td>
+            </tr>
 }
-    </tbody>
-</table>
+        </tbody>
+    </table>
+</div>
