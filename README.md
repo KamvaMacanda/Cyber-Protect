@@ -32,7 +32,6 @@ Centralized system for cybersecurity incidents in organizations and companys
 | CSS3              | Styles the application                     |
 | Bootstrap 5       | Creates a responsive design                |
 | JavaScript        | Adds interactivity                         |
-| jQuery            | Handles AJAX requests and DOM manipulation |
 | Chart.js          | Displays dashboards and charts             |
 | Font Awesome      | Provides icons                             |
 
