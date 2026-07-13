@@ -20,8 +20,7 @@ namespace Cyber_Protect.Controllers
             var threats = _context.Threats  
                         .Include(t => t.ThreatScore)
                         .Include(t => t.level)
-                        .Include(t => t.LoggedBy) 
-                        .Include(t => t.Severity)
+                          .Include(t => t.Severity)
                          .AsNoTracking();
 
 
