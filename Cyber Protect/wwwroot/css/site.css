@@ -11,9 +11,15 @@ html {
     }
 }
 
+/* ── Global body ────────────────────────────────────────────── */
+/* CHANGED: merged the two separate body rules into one */
 body {
     margin-bottom: 60px;
-    background: #0d1117;
+    background: linear-gradient(rgba(7,19,31,.80), rgba(7,19,31,.80)), url('/images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     color: #e6edf3;
 }
 
@@ -39,7 +45,7 @@ body {
 }
 
 /* ── Hero / page header block ───────────────────────────────── */
-/* CHANGED: border and bg updated to match --surface and --border tokens */
+
 .cp-hero {
     background: #161b22;
     border: 1px solid #30363d;
@@ -49,7 +55,7 @@ body {
 }
 
 /* ── Stat cards (dashboard summary row) ─────────────────────── */
-/* CHANGED: bg, border, and text colours updated to dark theme tokens */
+
 .cp-stat-card {
     background: #161b22;
     border: 1px solid #30363d;
@@ -72,7 +78,7 @@ body {
     }
 
 /* ── Utility colours ────────────────────────────────────────── */
-/* CHANGED: accent updated from blue #3b82f6 to cyber-green #00c896 */
+
 .cp-accent {
     color: #00c896;
 }
@@ -82,7 +88,7 @@ body {
 }
 
 /* ── Primary button ─────────────────────────────────────────── */
-/* CHANGED: bg updated from blue to accent green, text to dark for contrast */
+
 .btn-cp-primary {
     background: #00c896;
     border: none;
@@ -104,7 +110,7 @@ body {
     }
 
 /* ── Outline button ─────────────────────────────────────────── */
-/* CHANGED: border and hover colour updated to match accent green */
+
 .btn-cp-outline {
     background: transparent;
     border: 1px solid #30363d;
@@ -125,7 +131,7 @@ body {
     }
 
 /* ── Navbar ─────────────────────────────────────────────────── */
-/* CHANGED: border colour updated from #1e2a3a to --border #30363d */
+
 .cp-navbar {
     background: #161b22;
     border-bottom: 1px solid #30363d;
@@ -145,7 +151,7 @@ body {
     }
 
         .cp-navbar .navbar-brand:hover {
-            color: #00c896; /* CHANGED: hover colour to accent green */
+            color: #00c896;
         }
 
 /* ── Nav links ──────────────────────────────────────────────── */
@@ -158,7 +164,6 @@ body {
     padding: 0;
 }
 
-/* CHANGED: text, hover bg, and hover colour updated to match layout tokens */
 .cp-nav-link {
     display: flex;
     align-items: center;
@@ -177,9 +182,128 @@ body {
         color: #e6edf3;
     }
 
-    /* ADDED: active state — green text + subtle green background tint */
     .cp-nav-link.active {
         color: #00c896;
         background: rgba(0, 200, 150, 0.12);
     }
 
+/*==================================================
+    CYBER LOGIN PAGE
+==================================================*/
+
+/* ADDED: full-screen centering wrapper */
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+}
+
+/* ADDED: glassmorphism card */
+.login-card {
+    width: 100%;
+    max-width: 470px;
+    background: rgba(22, 27, 34, .72);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(0, 200, 150, .35);
+    border-radius: 20px;
+    padding: 45px;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, .55);
+}
+
+/* ADDED */
+.login-title {
+    color: #e6edf3;
+    font-weight: 700;
+}
+
+/* ADDED */
+.login-subtitle {
+    color: #8ba39b;
+}
+
+/* ADDED: form inputs on the login card */
+.cp-input {
+    background: #161b22 !important;
+    border: 1px solid #30363d;
+    color: #e6edf3;
+}
+
+    .cp-input:focus {
+        border-color: #00c896;
+        box-shadow: 0 0 15px rgba(0, 200, 150, .45);
+        color: #e6edf3;
+    }
+
+    .cp-input::placeholder {
+        color: #8b949e;
+    }
+
+/* ADDED: floating labels inside the dark card */
+.login-card .form-floating label {
+    color: #b8c8d8;
+}
+
+/
+.btn-login {
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #06120e;
+    background: linear-gradient(90deg, #00c896, #00e6a8);
+    transition: .3s;
+}
+
+    .btn-login:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0 20px rgba(0, 200, 150, .6);
+        color: #06120e;
+    }
+
+
+.forgot-link {
+    color: #00c896;
+    text-decoration: none;
+}
+
+    .forgot-link:hover {
+        color: #e6edf3;
+    }
+
+
+.login-links {
+    text-align: center;
+}
+
+    .login-links a {
+        color: #00c896;
+        text-decoration: none;
+    }
+
+        .login-links a:hover {
+            color: #e6edf3;
+        }
+
+.security-row {
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid rgba(255, 255, 255, .1);
+    padding-top: 25px;
+}
+
+.security-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #e6edf3;
+    font-size: 14px;
+}
+
+    .security-item span {
+        margin-top: 8px;
+    }

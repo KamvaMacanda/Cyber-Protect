@@ -39,14 +39,14 @@
                 <span asp-validation-for="DateReported" class="text-danger"></span>
             </div>  
 
-            <!-- add Threat dropdown -->
+            <!-- Threat dropdown -->
             <div class="form-group">
                 <label asp-for="ThreatID" class="control-label"></label>
                 <select asp-for="ThreatID" asp-items="ViewBag.ThreatID" class="form-control"></select>
                 <span asp-validation-for="ThreatID" class="text-danger"></span>
             </div>
 
-            <!-- add Employee dropdown -->
+            <!--  Employee dropdown -->
             <div class="form-group">
                 <label asp-for="EmployeeID" class="control-label">Analyst</label>
                 <select asp-for="EmployeeID" asp-items="ViewBag.EmployeeID" class="form-control"></select>
