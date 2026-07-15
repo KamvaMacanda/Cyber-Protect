@@ -7,10 +7,10 @@ namespace Cyber_Protect.Models
         [Key]
         public int ThreatID { get; set; }
 
-        [Required , StringLength(20)]
+        [Required , StringLength(100)]
         public string level { get; set; }
 
-        [Required , StringLength(20)]
+        [Required , StringLength(100)]
         public string Severity { get; set; }
            
 
@@ -20,9 +20,9 @@ namespace Cyber_Protect.Models
 
         public int ThreatScore { get; set; }
 
-      
 
 
+        [DataType(DataType.Date)]
         public DateTime DateLogged { get; set; } = DateTime.Now;
 
         public ICollection<Incident> Incidents { get; set; } = new List<Incident>();

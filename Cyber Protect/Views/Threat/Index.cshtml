@@ -55,15 +55,12 @@
 
                         <td>@threat.DateLogged.ToString("yyyy-MM-dd")</td>
                         <td>
-                            <a asp-action="Details" asp-route-id="@threat.ThreatID" class="btn btn-sm btn-secondary me-1">
-                                <i class="fa-solid fa-eye"></i>
-                            </a>
-                            <a asp-action="Edit" asp-route-id="@threat.ThreatID" class="btn btn-sm btn-secondary me-1">
-                                <i class="fa-solid fa-pen"></i>
-                            </a>
-                            <a asp-action="Delete" asp-route-id="@threat.ThreatID" class="btn btn-sm btn-danger">
-                                <i class="fa-solid fa-trash"></i>
-                            </a>
+                            <a asp-action="Details" asp-route-id="@threat.ThreatID" class="btn btn-sm btn-outline-secondary">Details</a>
+                            <a asp-action="Edit" asp-route-id="@threat.ThreatID" class="btn btn-sm btn-outline-primary">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@threat.ThreatID" class="btn btn-sm btn-outline-danger">Delete</a>
+
+
+
                         </td>
                     </tr>
                 }

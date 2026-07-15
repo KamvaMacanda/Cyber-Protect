@@ -19,11 +19,7 @@ namespace Cyber_Protect
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            //Adding indetity services and roles
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<AppDbContext>()
-                .AddDefaultTokenProviders();
-
+     
             //----------------------------------------------------------------------------------------------------------------------------------------//
 
             var app = builder.Build();
@@ -47,7 +43,7 @@ namespace Cyber_Protect
                 pattern: "{controller=Home}/{action=Index}/{id?}")
                 .WithStaticAssets();
 
-            app.MapRazorPages(); 
+  
 
             app.Run();
         }

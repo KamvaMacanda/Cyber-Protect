@@ -25,7 +25,7 @@ namespace Cyber_Protect.Controllers
                     .CountAsync(i => i.Status == "Open"),
 
                 ClosedThisMonth = await _context.Incidents
-                    .CountAsync(i => i.Status == "Closed"
+                    .CountAsync(i => i.Status == "Resolved"
                                && i.DateReported.Month == DateTime.Now.Month
                                && i.DateReported.Year == DateTime.Now.Year),
 
