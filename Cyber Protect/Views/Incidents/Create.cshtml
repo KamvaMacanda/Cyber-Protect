@@ -4,92 +4,107 @@
     ViewData["Title"] = "Create";
 }
 
+<div class="cp-hero">
+    <h4 class="mb-0"><i class="fa-solid fa-file-shield cp-accent me-2"></i>Document a Incident report</h4>
+</div>
 
+<div class="cp-form-card">
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-<h4> Document a Incident report </h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="cp-form-section">
+            <div class="cp-form-section-title"><i class="fa-solid fa-file-lines"></i> Incident Details</div>
+
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
+                <input asp-for="Title" class="form-control cp-input" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
+                <textarea asp-for="Description" class="form-control cp-input" rows="6"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
-            </div> 
-
-            <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <select asp-for="Status" class="form-control">
-                    <option value="">--Select Status --</option>
-                    <option value="Open">Open</option>
-                    <option value="In Progress">In Progress</option>
-                    <option value="Resolved">Resolved</option>
-                </select>
-                <span asp-validation-for="Status" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateReported" class="control-label"></label>
-                <input asp-for="DateReported" class="form-control" />
-                <span asp-validation-for="DateReported" class="text-danger"></span>
-            </div>  
-
-            <!-- Threat dropdown -->
-            <div class="form-group">
-                <label asp-for="ThreatID" class="control-label"></label>
-                <select asp-for="ThreatID" asp-items="ViewBag.ThreatID" class="form-control"></select>
-                <span asp-validation-for="ThreatID" class="text-danger"></span>
             </div>
 
-            <!--  Employee dropdown -->
-            <div class="form-group">
-                <label asp-for="EmployeeID" class="control-label">Analyst</label>
-                <select asp-for="EmployeeID" asp-items="ViewBag.EmployeeID" class="form-control"></select>
-                <span asp-validation-for="EmployeeID" class="text-danger"></span>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label asp-for="Status" class="control-label"></label>
+                    <select asp-for="Status" class="form-control cp-input">
+                        <option value="">--Select Status --</option>
+                        <option value="Open">Open</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Resolved">Resolved</option>
+                    </select>
+                    <span asp-validation-for="Status" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label asp-for="DateReported" class="control-label"></label>
+                    <input asp-for="DateReported" class="form-control cp-input" />
+                    <span asp-validation-for="DateReported" class="text-danger"></span>
+                </div>
             </div>
+        </div>
+
+        <div class="cp-form-section">
+            <div class="cp-form-section-title"><i class="fa-solid fa-user-shield"></i> Assignment</div>
+
+            <div class="row">
+                <!-- Threat dropdown -->
+                <div class="col-md-6 form-group">
+                    <label asp-for="ThreatID" class="control-label"></label>
+                    <select asp-for="ThreatID" asp-items="ViewBag.ThreatID" class="form-control cp-input"></select>
+                    <span asp-validation-for="ThreatID" class="text-danger"></span>
+                </div>
+
+                <!--  Employee dropdown -->
+                <div class="col-md-6 form-group">
+                    <label asp-for="EmployeeID" class="control-label">Analyst</label>
+                    <select asp-for="EmployeeID" asp-items="ViewBag.EmployeeID" class="form-control cp-input"></select>
+                    <span asp-validation-for="EmployeeID" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="cp-form-section">
+            <div class="cp-form-section-title"><i class="fa-solid fa-server"></i> Affected Systems</div>
 
             <div class="form-group">
-                <label class="control-label">Affected Systems</label>
-                <div class="d-flex flex-wrap gap-3">
+                <div class="cp-systems-grid">
                     @foreach (var system in ViewBag.CompanySystems as List<string>)
                     {
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox"
+                        <div class="cp-chip">
+                            <input type="checkbox"
                                    name="AffectedSystems"
                                    value="@system"
                                    id="sys_@system" />
-                            <label class="form-check-label" for="sys_@system">@system</label>
+                            <label for="sys_@system">@system</label>
                         </div>
                     }
                 </div>
                 <span asp-validation-for="AffectedSystems" class="text-danger"></span>
             </div>
+        </div>
 
+        <div class="cp-form-section">
+            <div class="cp-form-section-title"><i class="fa-solid fa-note-sticky"></i> </div>
 
             <div class="form-group">
-                <label asp-for="AddNotes" class="control-label"></label>
-                <input asp-for="AddNotes" class="form-control" />
-                <span asp-validation-for="AddNotes" class="text-danger"></span> 
-                </div>
-
-
-            <div class="form-group"> 
-             
-                <input type="submit" value="Create" class="btn btn-primary" />
+               
+                <textarea asp-for="AddNotes" class="form-control cp-input" rows="6"></textarea>
+                <span asp-validation-for="AddNotes" class="text-danger"></span>
             </div>
-        </form>
-    </div>
-</div>
+        </div>
 
-<div>
-    <a asp-action="Index" class="btn btn-secondary">Back</a>
+        <div class="cp-form-actions">
+            <input type="submit" value="Create" class="btn-cp-primary" />
+            <a asp-action="Index" class="btn-cp-outline">Back</a>
+        </div>
+    </form>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
