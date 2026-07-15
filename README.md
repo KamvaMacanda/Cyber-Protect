@@ -47,7 +47,7 @@ Centralized system for cybersecurity incidents in organizations and companys
 | Technology                          | Use                     |
 | ----------------------------------- | ----------------------- |
 | SQL Server                          | Stores application data |
-| SQL Server Management Studio (SSMS) | Manages the database    | 
+
 
 
 
